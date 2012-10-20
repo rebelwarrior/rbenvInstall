@@ -1,8 +1,6 @@
-require 'FileUtils'
+require 'fileutils'
 
 def install_rbenv(home=File.expand_path('~'), default=true)
-  # %x[rvm implode] if rvm? 
-  # Dir.chdir(Dir.home)
   puts '###### Installing rbenv.'
   Dir.chdir(home)
   Dir.mkdir('.rbenv')
@@ -41,4 +39,31 @@ def update_ruby_build(home=File.expand_path('~'))
   puts $?
 end
 
-#install_rbenv('C:/Sites/testrbenv', false)
+def update(home=File.expand_path('~'))
+  update_rbenv(home)
+  update_ruby_build(home)
+end
+
+def rvm_installed?
+  location = `which rvm`
+  dotrvm = File.exists?('.rvm')
+  !location.empty? || dotrvm
+end
+
+if $0 == __FILE__
+  abort("Note: rvm is incompatible w/ rbenv. Uninstall rvm first.") if rvm_installed?
+  options = ARGV
+  case options[0]
+  when /*-i*/
+    install_rbenv()
+  when /*-u*/
+    update()
+  when /*-test*/
+    install_rbenv('C:/Sites/testrbenv', false)
+  when /*-h*/
+	puts "Help file pending. Update '-u' Install '-i'"
+  else
+	install_rbenv('C:/Sites/testrbenv', false)
+  end
+
+end
