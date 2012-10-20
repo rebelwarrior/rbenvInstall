@@ -61,9 +61,9 @@ if $0 == __FILE__
   when /-t/, /--test/
     install_rbenv('C:/Sites/testrbenv', false)
   when /-h/, /--help/
-	puts "Help file pending. Update '-u' Install '-i'"
+    puts "Help file pending. Update '-u' Install '-i'"
   else
-	install_rbenv('C:/Sites/testrbenv', false)
+    install_rbenv('C:/Sites/testrbenv', false)
   end
 
 end
