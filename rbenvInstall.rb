@@ -54,13 +54,13 @@ if $0 == __FILE__
   abort("Note: rvm is incompatible w/ rbenv. Uninstall rvm first.") if rvm_installed?
   options = ARGV
   case options[0]
-  when /-i/
+  when /-i/, /--install/
     install_rbenv()
-  when /-u/
+  when /-u/, /--update/, /--upgrade/
     update()
-  when /--test/
+  when /-t/, /--test/
     install_rbenv('C:/Sites/testrbenv', false)
-  when /-h/
+  when /-h/, /--help/
 	puts "Help file pending. Update '-u' Install '-i'"
   else
 	install_rbenv('C:/Sites/testrbenv', false)
